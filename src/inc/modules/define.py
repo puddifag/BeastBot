@@ -1,3 +1,11 @@
+'''define.py
+Written by: techb - nulldigit
+Requires: BeatifulSoup4, Python2
+
+Written for use with BeastBot from evilzone.org
+Has not been tested with the bot.
+'''
+
 import urllib
 from bs4 import BeautifulSoup
 from inc import *
