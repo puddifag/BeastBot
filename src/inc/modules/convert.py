@@ -119,19 +119,4 @@ def conversion(unit_from, unit_to, number):
         return "ERROR: For usage please refer to !convert help"
 
 def help():
-    help = ''' !conversion help\n               
-
-       Units converted: 1. Feet/Meters/Yards\n   
-                        2. Kilograms to pounds\n
-                        3. Celsius to Fahreinheit\n
-      All conversions go both ways             \n
-      Usage: !convert <float(aka number)>ft to yds\n
-             !convert <float(aka number)>kg to lb\n
-             !convert <float(aka number)>lb to kg\n
-      Examples:\n
-                !convert 10F to C\n
-                !convert 10m to ft\n
-                !convert 10m to yds\n
-       /END of Help\n '''
-    
-    ircFunc.ircSay(msgto, str(help) ,irc)
+    ircFunc.ircSay(msgto, "Usage: !convert <float(aka number)> kg to lb" ,irc)
