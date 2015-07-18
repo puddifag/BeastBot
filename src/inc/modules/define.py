@@ -14,7 +14,7 @@ def define(line, irc):
     if msg2.strip():
         url = "http://dictionary.reference.com/browse/" + word
         info = urllib.urlopen(url)
-        soup = BeautifulSoup(url.read(), "lxml")
+        soup = BeautifulSoup(info.read(), "lxml")
         try:
             defset = soup.find_all("div", class_="def-content")
             out = "Def: %s" % defset[0].contents[0].strip()
