@@ -24,10 +24,10 @@ def getMovieInfo(title):
     response = urllib.urlopen(url)
     data = json.loads(response.read())
     if data['Response'] == 'True':
-        return (data['Title'],
-                data['Year'],
-                data['imdbRating'],
-                data['Plot'])
+        return ("Title: "+data['Title'],
+                "Year: "+data['Year'],
+                "Rating: "+data['imdbRating'],
+                "Plot: "+data['Plot'])
     else:
         return (False, "Movie: %s not found, check spelling?" % title)
     
