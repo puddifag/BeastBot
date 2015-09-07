@@ -7,13 +7,13 @@ def startTheParser(irc):
     # sleep to allow time for the bot to join the channel...
     # Should modify this and make it check for when it is in the channel
     time.sleep(30)
-    cookie = login(username='nafuti', password='Emmanuel1')
+    cookie = login(username='', password='')
     print cookie
     session = requests.session()
     last = ""
     while True:
         try:
-            print 'Getting ez posts'
+#            print 'Getting ez posts'
             r = session.get(url='https://evilzone.org/recent', cookies=cookie)
             html = r.text
 	    print html
