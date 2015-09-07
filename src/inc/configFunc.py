@@ -1,7 +1,8 @@
+from __future__ import print_function
 import mainFunc
 import ircFunc
 import errorhandling
-import sqlite3
+import sqlite3, sys
 
 '''
 Configuration Management
@@ -41,16 +42,18 @@ def ensureConf():
             break
         errorhandling.inputInfo('Tables created')
         errorhandling.inputInfo('Asking user for default values for configuration')
+	print("\nSetting up bot values in the database."
+		"\nValues in square brackets [\'Value\'] are default values, press enter to use them.\n")
         # Asks the user for configuration values for the database
-        serverAddress = raw_input("Default server address: ")
-        serverPort = raw_input("Default server port: ")
-        botNickname = raw_input("Default bot nickname: ")
-        botUsername = raw_input("Default bot username: ")
-        botRealname = raw_input("Default bot realname: ")
-        botPassword = raw_input("Bot nickserv password: ")
-        botComInit = raw_input("Bot command initializer ( such as !): ")
-        botChannel = raw_input("Bot default channel: ")
-        botAdmins = raw_input("Bot admin username: ")
+        serverAddress = getinput("Default server address", 'irc.evilzone.org')
+        serverPort = getinput("Default server port", 6667)
+        botNickname = getinput("Default bot nickname", 'EZBot')
+        botUsername = getinput("Default bot username", 'BeastBot')
+        botRealname = getinput("Default bot realname", 'BeastBot')
+        botPassword = getinput("Bot nickserv password:", recurse=False)
+        botComInit = getinput("Bot command initializer ( such as !)", '!')
+        botChannel = getinput("Bot default channel", '#Evilzone')
+        botAdmins = getinput("Bot admin username:")
         while con:
             # Inserts the users values into the configuration database
             cur = con.cursor()
@@ -68,12 +71,26 @@ def ensureConf():
             cur.execute("INSERT INTO bot (var,content) VALUES ('botadmins', '%s')" % botAdmins)
             con.commit()
             break
-        print 'Configuration complete'
-        print 'Starting bot'
+        print ('Configuration complete')
+        print ('Starting bot')
         errorhandling.inputInfo('Done inserting default values')
         errorhandling.inputInfo('Done creating configuration database')
 
+def getinput(prompt, default=None, recurse=True):
+	if default:
+		prompt = prompt + ' [' + str(default) + ']:'
 
+	if sys.hexversion > 0x03000000:
+		input_str = input(prompt)
+	else:
+		input_str = raw_input(prompt)
+
+	if default and not input_str:
+		return default
+	elif not input_str and recurse:
+		getinput(prompt)
+	else:
+		return input_str
 
 def getAllBotConf():
     # Receives all values from the configuration database and the table 'bot'

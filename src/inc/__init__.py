@@ -1,0 +1,1 @@
+__all__ =['mainFunc', 'ircFunc', 'errorhandling', 'configFunc', 'modFunc', 'privlog']
