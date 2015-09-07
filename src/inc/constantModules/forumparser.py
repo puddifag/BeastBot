@@ -1,5 +1,5 @@
 from inc import *
-import urllib2
+import requests
 import time
 import mechanize, cookielib
 
@@ -7,16 +7,16 @@ def startTheParser(irc):
     # sleep to allow time for the bot to join the channel...
     # Should modify this and make it check for when it is in the channel
     time.sleep(30)
-    cookie = login(username='', password='')
+    cookie = login(username='nafuti', password='Emmanuel1')
     print cookie
+    session = requests.session()
     last = ""
     while True:
         try:
-            opener = urllib2.build_opener()
-            opener.addheaders.append(('Cookie', cookie))
-            sock = opener.open('https://evilzone.org/recent')
-            html = response.read()
-            sock.close()
+            print 'Getting ez posts'
+            r = session.get(url='https://evilzone.org/recent', cookies=cookie)
+            html = r.text
+	    print html
             start = html.find('<div class="counter">1</div>') + 28
             end = html.find('</div>', start)
             source = html[start:end]
