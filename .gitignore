@@ -9,7 +9,8 @@ __pycache__/
 
 # BeastBot stuff
 conf/*.conf
-modules/__init.py__
+inc/__init__.py
+inc/modules/__init__.py
 log/*.log
 db/*.db
 *.db
